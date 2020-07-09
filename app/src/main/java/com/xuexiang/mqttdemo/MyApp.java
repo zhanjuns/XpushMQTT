@@ -24,7 +24,7 @@ import android.os.Build;
 import androidx.multidex.MultiDex;
 
 import com.xuexiang.mqttdemo.core.push.CustomPushReceiver;
-import com.xuexiang.mqttdemo.utils.sdkinit.UMengInit;
+//import com.xuexiang.mqttdemo.utils.sdkinit.UMengInit;
 import com.xuexiang.mqttdemo.utils.sdkinit.XBasicLibInit;
 import com.xuexiang.xpush.XPush;
 import com.xuexiang.xpush.core.dispatcher.impl.Android26PushDispatcherImpl;
@@ -60,9 +60,9 @@ public class MyApp extends Application {
         initXPush();
 
         //运营统计数据运行时不初始化
-        if (!MyApp.isDebug()) {
-            UMengInit.init(this);
-        }
+//        if (!MyApp.isDebug()) {
+//            UMengInit.init(this);
+//        }
     }
 
 
