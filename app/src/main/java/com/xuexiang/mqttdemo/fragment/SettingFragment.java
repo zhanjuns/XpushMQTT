@@ -25,6 +25,8 @@ import com.xuexiang.mqttdemo.utils.MMKVUtils;
 import com.xuexiang.mqttdemo.utils.XToastUtils;
 import com.xuexiang.xaop.annotation.SingleClick;
 import com.xuexiang.xpage.annotation.Page;
+import com.xuexiang.xpush.mqtt.agent.MqttPersistence;
+import com.xuexiang.xpush.mqtt.agent.MqttPushAgent;
 import com.xuexiang.xpush.mqtt.agent.entity.MqttOptions;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText;
@@ -86,11 +88,21 @@ public class SettingFragment extends BaseFragment {
         if (metHost.validate()) {
             MqttOptions option = new MqttOptions(metHost.getEditValue());
             option.setClientId(metClientId.getEditValue());
+            //将ClientId存入SP
+            MqttPushAgent.savePushToken(metClientId.getEditValue());
             option.setPort(StringUtils.toInt(metPort.getEditValue()));
             option.setUserName(metUsername.getEditValue());
+            //向SP中存入UserName
+            MqttPersistence.setUserName(metUsername.getEditValue());
             option.setPassword(metPassword.getEditValue());
+            //向SP中存入Password
+            MqttPersistence.setPassword(metPassword.getEditValue());
             option.setTimeout(StringUtils.toInt(metTimeout.getEditValue()));
+            //向SP中存入TimeOut
+            MqttPersistence.setTimeout(StringUtils.toInt(metTimeout.getEditValue()));
             option.setKeepAlive(StringUtils.toInt(metKeepAlive.getEditValue()));
+            //向SP中存入KeepAlive
+            MqttPersistence.setKeepAlive(StringUtils.toInt(metKeepAlive.getEditValue()));
             if (MMKVUtils.put(MqttOptions.KEY, option)) {
                 XToastUtils.success("保存成功");
                 setFragmentResult(RESULT_OK, null);

@@ -3,9 +3,8 @@
     package="com.xuexiang.mqttdemo">
 
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 
     <application
@@ -58,21 +57,35 @@
 
 
         <!--屏幕自适应设计图-->
+        <!--        <meta-data-->
+        <!--            android:name="design_width_in_dp"-->
+        <!--            android:value="720" />-->
+        <!--        <meta-data-->
+        <!--            android:name="design_height_in_dp"-->
+        <!--            android:value="1280" />-->
+
+        <!--********************************XPush各家推送的AppId注册地方************************************-->
+        <!--Mqtt推送静态注册， 这里注意修改连接的服务器地址-->
+        <!--        <meta-data-->
+        <!--            android:name="MQTT_HOST"-->
+        <!--            android:value="103.46.128.43" />-->
+        <!--        <meta-data-->
+        <!--            android:name="MQTT_PORT"-->
+        <!--            android:value="21552" />-->
+
+
         <meta-data
             android:name="design_width_in_dp"
             android:value="360" />
         <meta-data
             android:name="design_height_in_dp"
             android:value="640" />
-
-        <!--********************************XPush各家推送的AppId注册地方************************************-->
-        <!--Mqtt推送静态注册， 这里注意修改连接的服务器地址-->
         <meta-data
             android:name="MQTT_HOST"
-            android:value="103.46.128.43" />
+            android:value="61.133.196.45" />
         <meta-data
             android:name="MQTT_PORT"
-            android:value="21552" />
+            android:value="1883" />
 
         <!--********************************XPush各家推送的SDK注册地方**************************************-->
         <!--name格式：XPush_[PlatformName]_[PlatformCode]-->

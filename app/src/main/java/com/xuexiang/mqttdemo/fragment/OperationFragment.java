@@ -206,7 +206,7 @@ public class OperationFragment extends BaseFragment implements RecyclerViewHolde
         }
     }
 
-    public MqttCore buildMqttCore(MqttOptions option) {
+    public MqttCore buildMqttCore(MqttOptions option) {//这边是发布页面连接的时候调用的从来没有调用过
         return MqttCore.Builder(getContext(), option.getHost())
                 .setClientId(option.getClientId())
                 .setPort(option.getPort())

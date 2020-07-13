@@ -103,6 +103,7 @@ public final class MqttPushAgent {
         MqttPersistence.init(mContext);
         MqttPersistence.setServerHost(host);
         MqttPersistence.setServerPort(port);
+
     }
 
     /**
@@ -143,6 +144,7 @@ public final class MqttPushAgent {
     private MqttCore buildMqttCoreByOption(MqttOptions option) {
         return MqttCore.Builder(getContext(), option.getHost())
                 .setClientId(option.getClientId())
+//                .setClientId("D199688r3VH7")
                 .setPort(option.getPort())
                 .setUserName(option.getUserName())
                 .setPassWord(option.getPassword())

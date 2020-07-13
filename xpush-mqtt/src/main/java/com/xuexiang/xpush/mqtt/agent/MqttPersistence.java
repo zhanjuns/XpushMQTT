@@ -171,15 +171,15 @@ public final class MqttPersistence {
     }
 
     public static String getUserName() {
-        return getsSP().getString(KEY_USER_NAME, "");
+        return getsSP().getString(KEY_USER_NAME, "weikong");
     }
 
     public static String getPassword() {
-        return getsSP().getString(KEY_PASSWORD, "");
+        return getsSP().getString(KEY_PASSWORD, "weikong");
     }
 
     public static int getKeepAlive() {
-        return getsSP().getInt(KEY_PASSWORD, 0);
+        return getsSP().getInt(KEY_KEEP_ALIVE, 0);
     }
 
     public static int getTimeout() {

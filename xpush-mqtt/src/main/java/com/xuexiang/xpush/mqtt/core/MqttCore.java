@@ -121,10 +121,14 @@ public class MqttCore implements IMqttActionListener, MqttCallbackExtended {
         MqttConnectOptions options = new MqttConnectOptions();
         options.setAutomaticReconnect(builder.automaticReconnect);
         if (!TextUtils.isEmpty(builder.userName)) {
-            options.setUserName(builder.userName);
+            String username = builder.userName;
+            options.setUserName(username);
+//        options.setUserName("B07678C1A24647809C6D472FE0EF01C6");
         }
         if (!TextUtils.isEmpty(builder.passWord)) {
-            options.setPassword(builder.passWord.toCharArray());
+            String password = builder.passWord;
+            options.setPassword(password.toCharArray());
+//        options.setPassword("aee02aaaaaaaaaaaaaaa".toCharArray());
         }
         if (builder.timeout != 0) {
             options.setConnectionTimeout(builder.timeout);
@@ -167,6 +171,8 @@ public class MqttCore implements IMqttActionListener, MqttCallbackExtended {
                 mSubscriptions.put(subscription.getTopic(), subscription);
             }
         }
+        //不能每次初始化就清空呀
+//        clearSubscriptions();
         return this;
     }
 

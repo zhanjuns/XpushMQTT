@@ -25,11 +25,14 @@ import androidx.multidex.MultiDex;
 
 import com.xuexiang.mqttdemo.core.push.CustomPushReceiver;
 //import com.xuexiang.mqttdemo.utils.sdkinit.UMengInit;
+import com.xuexiang.mqttdemo.utils.MMKVUtils;
 import com.xuexiang.mqttdemo.utils.sdkinit.XBasicLibInit;
 import com.xuexiang.xpush.XPush;
 import com.xuexiang.xpush.core.dispatcher.impl.Android26PushDispatcherImpl;
 import com.xuexiang.xpush.mqtt.MqttPushClient;
 import com.xuexiang.xpush.mqtt.agent.MqttPersistence;
+import com.xuexiang.xpush.mqtt.agent.entity.MqttOptions;
+import com.xuexiang.xutil.common.StringUtils;
 import com.xuexiang.xutil.system.DeviceUtils;
 
 /**
@@ -78,7 +81,9 @@ public class MyApp extends Application {
         XPush.debug(MyApp.isDebug());
         XPush.init(this, new MqttPushClient());
         //暂时设置登录的客户端ID为AndroidID
-        MqttPersistence.setClientId(DeviceUtils.getAndroidID());
+        MqttPersistence.setClientId(MqttPersistence.getClientId());
+//        MqttOptions setting = MMKVUtils.getObject(MqttOptions.KEY, MqttOptions.class);
+//        MqttPersistence.setClientId(StringUtils.getString(setting.getClientId()));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //Android8.0静态广播注册失败解决方案二：修改发射器
             XPush.setIPushDispatcher(new Android26PushDispatcherImpl(CustomPushReceiver.class));

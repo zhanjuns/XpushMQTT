@@ -22,27 +22,18 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import com.xuexiang.mqttdemo.R;
 import com.xuexiang.mqttdemo.core.BaseFragment;
-import com.xuexiang.mqttdemo.location.GetLocation;
-import com.xuexiang.mqttdemo.utils.MMKVUtils;
-import com.xuexiang.mqttdemo.utils.XToastUtils;
-import com.xuexiang.xaop.annotation.SingleClick;
 import com.xuexiang.xpage.annotation.Page;
-import com.xuexiang.xpush.mqtt.agent.entity.MqttOptions;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
-import com.xuexiang.xutil.common.StringUtils;
 
 import butterknife.BindView;
 
-import static android.app.Activity.RESULT_OK;
-
 /**
- * @author xuexiang
- * @since 2019-07-08 00:52
+ * @author zhanjuns
+ * @since 2020-07-13 00:52
  */
 @Page(name = "获取位置信息\n获取手机经纬度信息")
 public class LocationFragment extends BaseFragment {
