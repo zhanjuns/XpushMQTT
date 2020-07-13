@@ -40,7 +40,8 @@ public class MainFragment extends BaseContainerFragment implements ClickUtils.On
                 //此处填写fragment
                 SettingFragment.class,
                 OperationFragment.class,
-                MqttPushFragment.class
+                MqttPushFragment.class,
+                LocationFragment.class
         };
     }
 
