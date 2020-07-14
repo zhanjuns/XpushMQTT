@@ -62,7 +62,7 @@
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="推送Token："
+                    android:text="推送ClientId："
                     android:textColor="@android:color/black"
                     android:textSize="15sp" />
 
@@ -148,6 +148,45 @@
                         android:hint="@string/hint_tag" />
 
                 </LinearLayout>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/rg_tag_select">
+                    <RadioButton
+                        android:id="@+id/rb_cmd_res"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="cmdR"/>
+                    <RadioButton
+                        android:id="@+id/rb_datas"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="datas"/>
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/rb_add_res"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="addR"/>-->
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/rb_update_res"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="upR"/>-->
+
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/rb_del_res"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="delR"/>-->
+
+                </RadioGroup>
 
                 <LinearLayout
                     android:layout_width="match_parent"

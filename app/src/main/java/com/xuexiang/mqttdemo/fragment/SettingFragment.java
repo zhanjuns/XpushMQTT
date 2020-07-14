@@ -40,7 +40,7 @@ import static android.app.Activity.RESULT_OK;
  * @author xuexiang
  * @since 2019-07-08 00:52
  */
-@Page(name = "Mqtt连接设置\n设置服务器地址、端口号、超时时间等")
+@Page(name = "Mqtt连接设置\n设置服务器地址、端口号、用户名、密码等")
 public class SettingFragment extends BaseFragment {
 
     @BindView(R.id.met_client_id)
@@ -122,7 +122,8 @@ public class SettingFragment extends BaseFragment {
         }
 
         metClientId.setText(StringUtils.getString(setting.getClientId()));
-        metHost.setText(StringUtils.getString(setting.getHost()));
+//        metHost.setText(StringUtils.getString(setting.getHost()));
+        metHost.setText("61.133.196.45");
         metPort.setText(String.valueOf(setting.getPort()));
         metUsername.setText(StringUtils.getString(setting.getUserName()));
         metPassword.setText(StringUtils.getString(setting.getPassword()));

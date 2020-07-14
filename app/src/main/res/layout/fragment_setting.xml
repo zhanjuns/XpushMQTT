@@ -50,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="?attr/xui_config_content_spacing_vertical"
                 android:hint="请输入服务器的IP地址"
+                android:text="61.133.196.45"
                 app:met_allowEmpty="false"
                 app:met_clearButton="true"
                 app:met_floatingLabel="highlight"
@@ -67,11 +68,6 @@
                 app:met_floatingLabel="highlight"
                 app:met_floatingLabelText="Server Port"
                 app:met_floatingLabelTextSize="12sp" />
-
-            <TextView
-                style="@style/TextStyle.Title"
-                android:layout_marginTop="16dp"
-                android:text="高级(选填)" />
 
             <com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText
                 android:id="@+id/met_username"
@@ -95,6 +91,11 @@
                 app:met_floatingLabelText="Password"
                 app:met_floatingLabelTextSize="12sp"
                 app:met_passWordButton="true" />
+
+            <TextView
+                style="@style/TextStyle.Title"
+                android:layout_marginTop="16dp"
+                android:text="高级(选填)" />
 
             <com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText
                 android:id="@+id/met_timeout"

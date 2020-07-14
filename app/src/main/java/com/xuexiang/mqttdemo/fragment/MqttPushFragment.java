@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.xuexiang.mqttdemo.R;
@@ -95,6 +96,9 @@ public class MqttPushFragment extends BaseFragment {
 
     @BindView(R.id.tv_log)
     TextView mTvLog;
+
+    @BindView(R.id.rg_tag_select)
+    RadioGroup rgTagSelect;
     /**
      * 日志记录
      */
@@ -114,6 +118,32 @@ public class MqttPushFragment extends BaseFragment {
         mTvLog.setMovementMethod(ScrollingMovementMethod.getInstance());
         //MqttPush暂不支持别名操作
         llAlias.setVisibility(View.GONE);
+
+        rgTagSelect.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_cmd_res:
+                        etTag.setText("/v1/devices/" + XPush.getPushToken() + "/commandResponse");
+                        break;
+                    case R.id.rb_datas:
+                        etTag.setText("/v1/devices/" + XPush.getPushToken() + "/datas");
+                        break;
+//                    case R.id.rb_add_res:
+//                        etTag.setText("/v1/devices/" + XPush.getPushToken() + "/topo/addResonse");
+//                        break;
+//                    case R.id.rb_update_res:
+//                        etTag.setText("/v1/devices/" + XPush.getPushToken() + "/topo/updateResponse");
+//                        break;
+//                    case R.id.rb_del_res:
+//                        etTag.setText("/v1/devices/" + XPush.getPushToken() + "/topo/deleteResponse");
+//                        break;
+                    default:
+                        etTag.setText("");
+                        break;
+                }
+            }
+        });
     }
 
 

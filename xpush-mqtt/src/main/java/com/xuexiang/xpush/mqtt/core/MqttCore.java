@@ -21,6 +21,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.xuexiang.xpush.mqtt.core.callback.OnMqttActionListener;
 import com.xuexiang.xpush.mqtt.core.callback.OnMqttEventListener;
@@ -311,10 +312,15 @@ public class MqttCore implements IMqttActionListener, MqttCallbackExtended {
 
     /**
      * 订阅所有主题
+     * 这个一直在调用
      */
     public void registerAllSubscriptions() {
+
         for (Subscription subscription : mSubscriptions.values()) {
+            Log.e("myError", "registerAllSubscriptions: 主题" + subscription.getTopic() + "内容" + subscription.toString());
             subscribe(subscription, true);
+            //我添加的remove
+//            mSubscriptions.remove(subscription.getTopic());
         }
     }
 
@@ -539,6 +545,7 @@ public class MqttCore implements IMqttActionListener, MqttCallbackExtended {
 
     /**
      * 订阅主题
+     * 不是这个
      *
      * @param subscription 主题信息
      */
@@ -547,7 +554,7 @@ public class MqttCore implements IMqttActionListener, MqttCallbackExtended {
     }
 
     /**
-     * 订阅主题
+     * 订阅主题操作！！！！！！
      *
      * @param subscription
      * @param isSilent     是否静默设置，没有回调
@@ -563,9 +570,13 @@ public class MqttCore implements IMqttActionListener, MqttCallbackExtended {
         try {
             if (isSilent) {
                 mClient.subscribe(subscription.getTopic(), subscription.getQos());
+//                mClient.subscribe(subscription.getTopic(), 1);
+//                Log.e("myError", "subscribe: " + subscription.getQos());
             } else {
                 MqttAction action = MqttAction.SUBSCRIBE.setArgs(subscription);
                 mClient.subscribe(subscription.getTopic(), subscription.getQos(), action, this);
+//                mClient.subscribe(subscription.getTopic(), 1, action, this);
+//                Log.e("myError", "subscribe: " + subscription.getQos());
             }
             return true;
         } catch (MqttException e) {
