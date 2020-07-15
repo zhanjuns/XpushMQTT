@@ -27,7 +27,7 @@ import org.eclipse.paho.android.service.MqttTraceHandler;
  */
 public class XPushTraceCallback implements MqttTraceHandler {
 
-    private static final String TAG = "MQTT-";
+    private static final String TAG = "mqtt-";
 
     @Override
     public void traceDebug(String tag, String message) {

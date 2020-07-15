@@ -34,6 +34,8 @@ import com.xuexiang.mqttdemo.utils.MMKVUtils;
 import com.xuexiang.mqttdemo.utils.XToastUtils;
 import com.xuexiang.mqttdemo.widget.PublishDialog;
 import com.xuexiang.xpage.annotation.Page;
+import com.xuexiang.xpush.XPush;
+import com.xuexiang.xpush.core.annotation.ConnectStatus;
 import com.xuexiang.xpush.mqtt.agent.entity.MqttOptions;
 import com.xuexiang.xpush.mqtt.core.entity.ConnectionStatus;
 import com.xuexiang.xpush.mqtt.core.entity.MqttAction;
@@ -127,6 +129,11 @@ public class OperationFragment extends BaseFragment implements RecyclerViewHolde
         }, "否");
     }
 
+    /**
+     * 切换按钮状态
+     *
+     * @param isConnected
+     */
     private void refreshConnectionStatus(boolean isConnected) {
         if (isConnected) {
             btnConnect.setEnabled(false);
@@ -147,7 +154,7 @@ public class OperationFragment extends BaseFragment implements RecyclerViewHolde
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_connect:
-                doConnect();
+                    doConnect();
                 break;
             case R.id.btn_disconnect:
                 doDisConnect();
@@ -170,7 +177,7 @@ public class OperationFragment extends BaseFragment implements RecyclerViewHolde
             return;
         }
 
-        if (mMqttCore == null) {
+        if (mMqttCore == null /*&& XPush.getConnectStatus() == ConnectStatus.DISCONNECT*/) {
             mMqttCore = buildMqttCore(mMqttOptions);
             //订阅信息
             mMqttCore.setSubscriptions(mMqttOptions.getSubscriptions());
@@ -206,7 +213,7 @@ public class OperationFragment extends BaseFragment implements RecyclerViewHolde
         }
     }
 
-    public MqttCore buildMqttCore(MqttOptions option) {//这边是发布页面连接的时候调用的从来没有调用过
+    public MqttCore buildMqttCore(MqttOptions option) {//这边是发布页面连接的时候调用的
         return MqttCore.Builder(getContext(), option.getHost())
                 .setClientId(option.getClientId())
                 .setPort(option.getPort())
@@ -251,6 +258,16 @@ public class OperationFragment extends BaseFragment implements RecyclerViewHolde
                         String topic = ((MaterialDialog) dialog).getInputEditText().getText().toString();
                         if (StringUtils.isEmpty(topic)) {
                             XToastUtils.error("主题不能为空！");
+                            return;
+                        }
+                        if (topic.equals("a")) {
+                            ((MaterialDialog) dialog).getInputEditText().setText("/v1/devices/hw-simulate-test-02/topo/updateResponse");
+                            XToastUtils.info("选择updateResponse");
+                            return;
+                        }
+                        if (topic.equals("b")) {
+                            ((MaterialDialog) dialog).getInputEditText().setText("/v1/devices/hw-simulate-test-02/datas");
+                            XToastUtils.info("选择datas");
                             return;
                         }
                         dialog.dismiss();

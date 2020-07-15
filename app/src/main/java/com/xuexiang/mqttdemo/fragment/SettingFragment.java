@@ -28,8 +28,10 @@ import com.xuexiang.xpage.annotation.Page;
 import com.xuexiang.xpush.mqtt.agent.MqttPersistence;
 import com.xuexiang.xpush.mqtt.agent.MqttPushAgent;
 import com.xuexiang.xpush.mqtt.agent.entity.MqttOptions;
+import com.xuexiang.xui.XUI;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.edittext.materialedittext.MaterialEditText;
+import com.xuexiang.xutil.XUtil;
 import com.xuexiang.xutil.common.StringUtils;
 
 import butterknife.BindView;
@@ -91,6 +93,11 @@ public class SettingFragment extends BaseFragment {
             //将ClientId存入SP
             MqttPushAgent.savePushToken(metClientId.getEditValue());
             option.setPort(StringUtils.toInt(metPort.getEditValue()));
+
+            //我改动的，将manifests中的配置取消掉了，直接从这里存
+            MqttPersistence.setServerHost(metHost.getEditValue());
+            MqttPersistence.setServerPort(StringUtils.toInt(metPort.getEditValue()));
+
             option.setUserName(metUsername.getEditValue());
             //向SP中存入UserName
             MqttPersistence.setUserName(metUsername.getEditValue());
@@ -122,8 +129,8 @@ public class SettingFragment extends BaseFragment {
         }
 
         metClientId.setText(StringUtils.getString(setting.getClientId()));
-//        metHost.setText(StringUtils.getString(setting.getHost()));
-        metHost.setText("61.133.196.45");
+        metHost.setText(StringUtils.getString(setting.getHost()));
+//        metHost.setText("172.20.2.1");
         metPort.setText(String.valueOf(setting.getPort()));
         metUsername.setText(StringUtils.getString(setting.getUserName()));
         metPassword.setText(StringUtils.getString(setting.getPassword()));

@@ -22,7 +22,7 @@ import com.xuexiang.xpush.mqtt.core.entity.MqttAction;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 
 /**
- * MQTT 动作监听
+ * mqtt 动作监听
  *
  * @author xuexiang
  * @since 2019-12-13 9:16

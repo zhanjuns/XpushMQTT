@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * MQTT 参数本地持久化，使用SharedPreferences进行存储
+ * mqtt 参数本地持久化，使用SharedPreferences进行存储
  *
  * @author xuexiang
  * @since 2019-12-16 00:18

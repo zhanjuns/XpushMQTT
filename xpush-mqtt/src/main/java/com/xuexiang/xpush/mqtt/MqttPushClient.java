@@ -25,6 +25,7 @@ import com.xuexiang.xpush.XPush;
 import com.xuexiang.xpush.core.IPushClient;
 import com.xuexiang.xpush.core.XPushManager;
 import com.xuexiang.xpush.logs.PushLog;
+import com.xuexiang.xpush.mqtt.agent.MqttPersistence;
 import com.xuexiang.xpush.mqtt.agent.MqttPushAgent;
 import com.xuexiang.xpush.mqtt.core.MqttCore;
 import com.xuexiang.xpush.mqtt.core.callback.MqttEventListenerAdapter;
@@ -85,20 +86,24 @@ public class MqttPushClient implements IPushClient {
     @Override
     public void init(Context context) {
         if (!MqttPushAgent.isInitialized()) {
+            //我将读取AndroidManifest.xml中port和host改为读取SP中的
             //读取MQTT连接服务器对应的host和port
-            try {
-                Bundle metaData = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA).metaData;
-                String host = metaData.getString(MQTT_HOST).trim();
-                int port = metaData.getInt(MQTT_PORT, MqttCore.DEFAULT_MQTT_PORT);
+//            try {
+//                Bundle metaData = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA).metaData;
+//                String host = metaData.getString(MQTT_HOST).trim();
+//                int port = metaData.getInt(MQTT_PORT, MqttCore.DEFAULT_MQTT_PORT);
+//                String host = MqttPersistence.getServerHost();
+//                int port = MqttPersistence.getServerPort();
 
-                MqttPushAgent.getInstance().init(context, host, port);
-            } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
-                PushLog.e("can't find MQTT_HOST or MQTT_PORT in AndroidManifest.xml");
-            } catch (NullPointerException e) {
-                e.printStackTrace();
-                PushLog.e("can't find MQTT_HOST or MQTT_PORT in AndroidManifest.xml");
-            }
+//                MqttPushAgent.getInstance().init(context, host, port);
+                MqttPushAgent.getInstance().init(context);
+//            } catch (PackageManager.NameNotFoundException e) {
+//                e.printStackTrace();
+//                PushLog.e("can't find MQTT_HOST or MQTT_PORT in AndroidManifest.xml");
+//            } catch (NullPointerException e) {
+//                e.printStackTrace();
+//                PushLog.e("can't find MQTT_HOST or MQTT_PORT in AndroidManifest.xml");
+//            }
         }
     }
 

@@ -30,7 +30,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
  */
 public abstract class MqttEventListenerAdapter implements OnMqttEventListener {
 
-    private static final String TAG = "MQTT-";
+    private static final String TAG = "mqtt-";
 
     @Override
     public void onConnectionStatusChanged(ConnectionStatus oldStatus, ConnectionStatus newStatus) {

@@ -50,7 +50,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="?attr/xui_config_content_spacing_vertical"
                 android:hint="请输入服务器的IP地址"
-                android:text="61.133.196.45"
                 app:met_allowEmpty="false"
                 app:met_clearButton="true"
                 app:met_floatingLabel="highlight"

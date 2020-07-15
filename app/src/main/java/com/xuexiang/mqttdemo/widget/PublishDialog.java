@@ -59,12 +59,23 @@ public class PublishDialog extends CustomMaterialDialog {
                 .onPositive((dialog, which) -> {
                     if (metTopic.validate() && metMessage.validate()) {
                         KeyboardUtils.forceCloseKeyboard(metMessage);
+
                         if (mListener != null) {
                             String topic = metTopic.getEditValue();
+
+                            //D199688r3VH7
+                            if ("/v1/devices/hw-simulate-test-02/datas".equals(topic)) {
+                                metMessage.setText("{\"devices\": [{ \"deviceId\": \"D199688r3VH7\", \"services\":" +
+                                        " [{ \"data\": { \"X\": \"1000\" }, \"eventTime\": \"20191023T173625Z\"," +
+                                        "\"serviceId\":\"serviceName\"}] }] }");
+                            }
+
                             if (TOPIC_PROTOBUF.equals(topic)) {
+                                //发布主题的内容--上面判断如果主题为protobuf--则会又一个绑定
                                 ActionRequest actionRequest = ActionRequest.newBuilder().setMessage(metMessage.getEditValue()).build();
                                 mListener.onPublish(PublishMessage.wrap(topic, actionRequest.toByteArray()));
                             } else {
+                                //主要是这条线路
                                 mListener.onPublish(PublishMessage.wrap(topic, metMessage.getEditValue()));
                             }
                         }

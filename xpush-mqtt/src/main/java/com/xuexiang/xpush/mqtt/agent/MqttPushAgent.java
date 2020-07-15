@@ -32,7 +32,7 @@ import org.eclipse.paho.client.mqttv3.IMqttToken;
 import java.util.Set;
 
 /**
- * MQTT 推送代理
+ * mqtt 推送代理
  *
  * @author xuexiang
  * @since 2019-12-15 22:41
@@ -95,14 +95,13 @@ public final class MqttPushAgent {
      * 初始化
      *
      * @param context
-     * @param host    mqtt服务器地址
-     * @param port    端口
      */
-    public void init(Context context, String host, int port) {
+//    public void init(Context context, String host, int port) {
+    public void init(Context context) {
         mContext = context.getApplicationContext();
         MqttPersistence.init(mContext);
-        MqttPersistence.setServerHost(host);
-        MqttPersistence.setServerPort(port);
+//        MqttPersistence.setServerHost(host);
+//        MqttPersistence.setServerPort(port);
 
     }
 

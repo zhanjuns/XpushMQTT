@@ -111,6 +111,7 @@ public class MqttPushFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
+        //设置推送平台
         tvPushPlatform.setText(String.format("%s(%d)", XPush.getPlatformName(), XPush.getPlatformCode()));
         tvToken.setText(XPush.getPushToken());
         tvStatus.setText(PushUtils.formatConnectStatus(XPush.getConnectStatus()));
@@ -119,6 +120,7 @@ public class MqttPushFragment extends BaseFragment {
         //MqttPush暂不支持别名操作
         llAlias.setVisibility(View.GONE);
 
+        //自己添加的Topic选择单选框
         rgTagSelect.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

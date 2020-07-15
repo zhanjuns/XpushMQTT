@@ -49,7 +49,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * MQTT Core API
+ * mqtt Core API
  *
  * @author xuexiang
  * @since 2019-12-11 22:41
