@@ -1,8 +1,13 @@
 package com.xuexiang.mqttdemo.bean;
 
-public class Data {
+import java.io.Serializable;
+
+public class Data implements Serializable {
     private String longitude;
     private String latitude;
+
+
+    private static final long serialVersionUID = -68497944667710L;
 
     @Override
     public String toString() {

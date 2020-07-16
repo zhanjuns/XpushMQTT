@@ -18,6 +18,7 @@
 package com.xuexiang.mqttdemo.widget;
 
 import android.content.Context;
+import android.location.Location;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,6 +27,7 @@ import com.xuexiang.mqttdemo.R;
 import com.xuexiang.mqttdemo.bean.Data;
 import com.xuexiang.mqttdemo.bean.Devices;
 import com.xuexiang.mqttdemo.bean.Services;
+import com.xuexiang.mqttdemo.utils.LocationUtil;
 import com.xuexiang.xpush.mqtt.agent.MqttPersistence;
 import com.xuexiang.xpush.mqtt.core.entity.PublishMessage;
 import com.xuexiang.xui.utils.KeyboardUtils;
@@ -82,8 +84,9 @@ public class PublishDialog extends CustomMaterialDialog {
                                 ArrayList<Devices> devicesArrayList = new ArrayList<>();
                                 ArrayList<Services> servicesArrayList = new ArrayList<>();
 
+                                Data data = LocationUtil.getLocationUtil(context).getData();
                                 //先创建Services
-                                Services services = new Services(new Data("123.56", "87.45"), getEventTime(), "suibian");
+                                Services services = new Services(data, getEventTime(), "suibian");
                                 servicesArrayList.add(services);
 
                                 String deviceId = MqttPersistence.getClientId();

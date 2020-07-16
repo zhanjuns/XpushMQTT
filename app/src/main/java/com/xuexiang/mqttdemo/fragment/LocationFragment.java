@@ -18,14 +18,17 @@
 package com.xuexiang.mqttdemo.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.widget.TextView;
 
 import com.xuexiang.mqttdemo.R;
 import com.xuexiang.mqttdemo.core.BaseFragment;
+import com.xuexiang.mqttdemo.utils.XToastUtils;
 import com.xuexiang.xpage.annotation.Page;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 
@@ -74,13 +77,21 @@ public class LocationFragment extends BaseFragment {
         getLocation();
     }
 
-    private void getLocation()
+    public void getLocation()
     {
         //获取系统的LocationManager对象
         final LocationManager mLocationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
+        if(!mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+            XToastUtils.info("请打开使用GPS和使用网络定位以提高精度");
+            startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+        }
         try
         {
             mLocation = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            updateLocation(mLocation);
+            mLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            updateLocation(mLocation);
+            mLocation = mLocationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
             updateLocation(mLocation);
             mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, new LocationListener() {
                 @Override

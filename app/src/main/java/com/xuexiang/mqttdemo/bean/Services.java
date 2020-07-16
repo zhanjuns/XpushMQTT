@@ -1,9 +1,13 @@
 package com.xuexiang.mqttdemo.bean;
 
-public class Services {
+import java.io.Serializable;
+
+public class Services implements Serializable {
     private Data data;
     private String eventTime;
     private String serviceId;
+
+    private static final long serialVersionUID = -6849794410L;
 
     public Services() {
     }

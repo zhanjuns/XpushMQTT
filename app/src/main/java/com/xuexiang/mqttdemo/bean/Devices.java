@@ -2,11 +2,14 @@ package com.xuexiang.mqttdemo.bean;
 
 import com.google.gson.JsonObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Devices {
+public class Devices implements Serializable {
     private String deviceId;
     ArrayList<Services> services;
+
+    private static final long serialVersionUID = -684979667710L;
 
     @Override
     public String toString() {

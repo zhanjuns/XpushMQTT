@@ -194,6 +194,8 @@ public class OperationFragment extends BaseFragment implements RecyclerViewHolde
             mMqttCore = buildMqttCore(mMqttOptions);
             //订阅信息
             mMqttCore.setSubscriptions(mMqttOptions.getSubscriptions());
+            //我添加的，订阅所有信息
+            mMqttCore.registerAllSubscriptions();
             //动作回调
             mMqttCore.setOnMqttActionListener(mOnMqttActionListener);
             //事件回调
@@ -210,7 +212,7 @@ public class OperationFragment extends BaseFragment implements RecyclerViewHolde
                             e.printStackTrace();
                         }
                     } else {
-                        XToastUtils.info("收到 [topic]:" + topic + "[message]:" + message.toString());
+//                        XToastUtils.info("收到 [topic]:" + topic + "[message]:" + message.toString());
                         addLog("收到" + topic + ":" + message.toString(), SUCCESS);
                     }
                 }
@@ -221,6 +223,7 @@ public class OperationFragment extends BaseFragment implements RecyclerViewHolde
                     refreshConnectionStatus(newStatus == ConnectionStatus.CONNECTED);
                 }
             });
+            mMqttCore.connect();
         }
         if (!mMqttCore.isConnected()) {
             mMqttCore.connect();

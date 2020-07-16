@@ -318,7 +318,8 @@ public class MqttCore implements IMqttActionListener, MqttCallbackExtended {
 
         for (Subscription subscription : mSubscriptions.values()) {
             Log.e("myError", "registerAllSubscriptions: 主题" + subscription.getTopic() + "内容" + subscription.toString());
-            subscribe(subscription, true);
+//            subscribe(subscription, true);
+            subscribe(subscription, false);
             //我添加的remove
 //            mSubscriptions.remove(subscription.getTopic());
         }
