@@ -75,12 +75,32 @@
             android:layout_marginTop="?attr/xui_config_content_spacing_horizontal"
             android:text="已订阅主题" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="?attr/xui_config_content_spacing_horizontal"
-            android:overScrollMode="never" />
+            android:orientation="horizontal">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?attr/xui_config_content_spacing_horizontal"
+                android:overScrollMode="never" />
+
+            <TextView
+                android:id="@+id/tv_log_"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/xui_config_color_gray_8"
+                android:lineSpacingExtra="10dp"
+                android:padding="5dp"
+                android:scrollbars="vertical"
+                android:singleLine="false"
+                android:textColor="@color/xui_config_color_white" />
+        </LinearLayout>
+
 
 
     </LinearLayout>

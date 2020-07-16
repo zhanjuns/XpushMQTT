@@ -19,8 +19,14 @@ package com.xuexiang.mqttdemo.fragment;
 
 import android.content.Intent;
 import android.text.InputType;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.method.ScrollingMovementMethod;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +39,7 @@ import com.xuexiang.mqttdemo.core.BaseFragment;
 import com.xuexiang.mqttdemo.utils.MMKVUtils;
 import com.xuexiang.mqttdemo.utils.XToastUtils;
 import com.xuexiang.mqttdemo.widget.PublishDialog;
+import com.xuexiang.xaop.annotation.MainThread;
 import com.xuexiang.xpage.annotation.Page;
 import com.xuexiang.xpush.XPush;
 import com.xuexiang.xpush.core.annotation.ConnectStatus;
@@ -46,6 +53,7 @@ import com.xuexiang.xpush.mqtt.core.entity.PublishMessage;
 import com.xuexiang.xpush.mqtt.core.entity.Subscription;
 import com.xuexiang.xui.adapter.recyclerview.BaseRecyclerAdapter;
 import com.xuexiang.xui.adapter.recyclerview.RecyclerViewHolder;
+import com.xuexiang.xui.utils.ResUtils;
 import com.xuexiang.xui.utils.WidgetUtils;
 import com.xuexiang.xui.widget.dialog.DialogLoader;
 import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
@@ -59,6 +67,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import static android.app.Activity.RESULT_OK;
+import static com.xuexiang.mqttdemo.fragment.MqttPushFragment.LogType.SUCCESS;
 
 /**
  * @author xuexiang
@@ -80,6 +89,8 @@ public class OperationFragment extends BaseFragment implements RecyclerViewHolde
     Button btnPublish;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+    @BindView(R.id.tv_log_)
+    TextView mTvLog;
 
     private MqttCore mMqttCore;
     private MqttOptions mMqttOptions;
@@ -110,6 +121,8 @@ public class OperationFragment extends BaseFragment implements RecyclerViewHolde
                 holder.text(android.R.id.text1, item.getTopic());
             }
         });
+
+        mTvLog.setMovementMethod(ScrollingMovementMethod.getInstance());
         refreshConnectionStatus(false);
     }
 
@@ -154,7 +167,7 @@ public class OperationFragment extends BaseFragment implements RecyclerViewHolde
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_connect:
-                    doConnect();
+                doConnect();
                 break;
             case R.id.btn_disconnect:
                 doDisConnect();
@@ -198,6 +211,7 @@ public class OperationFragment extends BaseFragment implements RecyclerViewHolde
                         }
                     } else {
                         XToastUtils.info("收到 [topic]:" + topic + "[message]:" + message.toString());
+                        addLog("收到" + topic + ":" + message.toString(), SUCCESS);
                     }
                 }
 
@@ -261,12 +275,12 @@ public class OperationFragment extends BaseFragment implements RecyclerViewHolde
                             return;
                         }
                         if (topic.equals("a")) {
-                            ((MaterialDialog) dialog).getInputEditText().setText("/v1/devices/hw-simulate-test-02/topo/updateResponse");
+                            ((MaterialDialog) dialog).getInputEditText().setText("/v1/devices/palm-PAD/topo/command");
                             XToastUtils.info("选择updateResponse");
                             return;
                         }
                         if (topic.equals("b")) {
-                            ((MaterialDialog) dialog).getInputEditText().setText("/v1/devices/hw-simulate-test-02/datas");
+                            ((MaterialDialog) dialog).getInputEditText().setText("/v1/devices/palm-PAD/datas");
                             XToastUtils.info("选择datas");
                             return;
                         }
@@ -331,5 +345,72 @@ public class OperationFragment extends BaseFragment implements RecyclerViewHolde
         }
         super.onDestroyView();
     }
+
+
+    //=================日志====================//
+
+
+    /**
+     * 日志记录
+     */
+    private SpannableStringBuilder mLogSb = new SpannableStringBuilder();
+
+    /**
+     * 添加日志
+     *
+     * @param logContent
+     * @param logType
+     */
+    private void addLog(String logContent, MqttPushFragment.LogType logType) {
+        SpannableString spannableString = new SpannableString(logContent);
+        switch (logType) {
+            case NORMAL:
+                break;
+            case ERROR:
+                spannableString.setSpan(new ForegroundColorSpan(ResUtils.getColor(R.color.xui_config_color_edittext_error_text)),
+                        0,
+                        logContent.length(),
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                break;
+            case SUCCESS:
+                spannableString.setSpan(new ForegroundColorSpan(ResUtils.getColor(R.color.colorPrimaryDark)),
+                        0,
+                        logContent.length(),
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                break;
+            default:
+                break;
+        }
+        updateLog(spannableString);
+    }
+
+    @MainThread
+    protected void updateLog(SpannableString spannableString) {
+        mLogSb.append(spannableString)
+                .append("\r\n");
+        mTvLog.setText(mLogSb);
+    }
+
+    @MainThread
+    private void clearLog() {
+        mLogSb.delete(0, mLogSb.length());
+        mTvLog.setText(mLogSb);
+    }
+
+    public enum LogType {
+        /**
+         * 普通日志
+         */
+        NORMAL,
+        /**
+         * 成功的日志
+         */
+        SUCCESS,
+        /**
+         * 出错的日志
+         */
+        ERROR
+    }
+
 
 }

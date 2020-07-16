@@ -126,7 +126,7 @@ public class MqttPushFragment extends BaseFragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.rb_cmd_res:
-                        etTag.setText("/v1/devices/" + XPush.getPushToken() + "/commandResponse");
+                        etTag.setText("/v1/devices/" + XPush.getPushToken() + "/command");
                         break;
                     case R.id.rb_datas:
                         etTag.setText("/v1/devices/" + XPush.getPushToken() + "/datas");

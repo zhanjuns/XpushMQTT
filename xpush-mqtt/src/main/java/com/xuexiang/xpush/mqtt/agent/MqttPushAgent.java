@@ -120,8 +120,9 @@ public final class MqttPushAgent {
     public boolean register(OnMqttActionListener onMqttActionListener) {
         if (mMqttCore == null) {
             if (TextUtils.isEmpty(MqttPersistence.getServerHost())) {
-                throw new IllegalArgumentException("Mqtt push host is not init," +
-                        "please call MqttPushAgent.getInstance().init to set host.");
+                return false;
+//                throw new IllegalArgumentException("Mqtt push host is not init," +
+//                        "please call MqttPushAgent.getInstance().init to set host.");
             }
             MqttOptions options = MqttPersistence.getMqttOptions();
             mMqttCore = buildMqttCoreByOption(options);
